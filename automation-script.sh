@@ -36,13 +36,15 @@ echo " "
 #Execute the k8 service file in the namespace created:
 kubectl create -f service.yml -n monitoring
 
-# Sleep for 60 seconds, just in case for the k8 resources to be up & running stable:
+echo " "
+echo "Sleep for 60 seconds, just in case for the k8 resources to be up & running stable"
 sleep 60
 
 echo " "
 echo "***Port-forwarding Cluster-ip service to localhost:8080 as a background process***"
 kubectl port-forward service/romannumeralconverter-svc -n monitoring 8080:8080 &
-echo "Access RomanNumeralConverter Applicaion: http://localhost:8080/romannumeral?query=1"
+echo " "
+echo "***Access RomanNumeralConverter Applicaion: http://localhost:8080/romannumeral?query=1 ***"
 
 echo " "
 echo "***Pulling & deploying Grafana docker image***"
@@ -66,5 +68,6 @@ echo " "
 echo "***Once the prometheus.yml file is updated with the IP address, deploy prometheus by executing the below docker command***"
 echo " "
 echo "docker run -d --name prometheus -p 9090:9090 -v <path/to/file>/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus"
+echo " "
 echo "Access Prometheus: http://localhost:9090/ ***"
 echo "##################"
