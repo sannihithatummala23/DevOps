@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roman-numeral-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: RomanNumeral
+  template:
+    metadata:
+      labels:
+        app: RomanNumeral
+    spec:
+      containers:
+      - name: romannumeral-converter
+        image: sannihithatummala/a-project:1.0
+        ports:
+        - containerPort: 8080
