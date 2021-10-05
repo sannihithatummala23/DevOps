@@ -9,8 +9,8 @@ git clone https://github.com/sannihithatummala23/DevOps.git
 #As we have already created a Docker image and uploaded it to Docker hub,
 # next step, which is k8 deployment will retrive the image from there.
 
-#Sleep 15 Seconds
-sleep 15
+#Sleep 10 Seconds, just in case for the Repository to download:
+sleep 10
 
 # Change directory to DevOps dir
 cd DevOps
@@ -22,7 +22,7 @@ kubectl create namespace monitoring
 kubectl create -f deployment.yml -n monitoring
 kubectl create -f service.yml -n monitoring
 
-# Sleep for 30 seconds
+# Sleep for 30 seconds, just in case for the k8 resources to be up & running:
 sleep 30
 
 # Port-forwarding Cluster-ip service to localhost:8080 as a background process
