@@ -1,7 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: roman-numeral-deploy
+  name: romannumeral-converter
+  labels:
+    app: RomanNumeral
 spec:
   replicas: 1
   selector:
@@ -13,7 +15,27 @@ spec:
         app: RomanNumeral
     spec:
       containers:
-      - name: romannumeral-converter
-        image: sannihithatummala/a-project:1.0
-        ports:
-        - containerPort: 8080
+        - name: romannumeral-converter
+          image: sannihithatummala/a-project:1.0
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
+              name: liveness-port
+          readinessProbe:
+            tcpSocket:
+              port: liveness-port
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: liveness-port
+            failureThreshold: 1
+            periodSeconds: 10
+            initialDelaySeconds: 5
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: liveness-port
+            failureThreshold: 2
+            periodSeconds: 30
