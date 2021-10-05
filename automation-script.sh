@@ -15,12 +15,15 @@ sleep 15
 # Change directory to DevOps dir
 cd DevOps
 
-#Execute the k8 deployment and service files
-kubectl create -f deployment.yml
-kubectl create -f service.yml
+# Create a nameSpace for k8 monitoring stack:
+kubectl create namespace monitoring
 
-# Sleep for 45 seconds
-sleep 45
+#Execute the k8 deployment and service files in the namespace created:
+kubectl create -f deployment.yml -n monitoring
+kubectl create -f service.yml -n monitoring
+
+# Sleep for 30 seconds
+sleep 30
 
 # Port-forwarding Cluster-ip service to localhost:8080 as a background process
 kubectl port-forward service/romannumeralconverter-svc 8080:8080 &
