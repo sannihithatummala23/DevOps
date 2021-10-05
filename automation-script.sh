@@ -22,7 +22,7 @@ kubectl create namespace monitoring
 kubectl create -f deployment.yml -n monitoring
 kubectl create -f service.yml -n monitoring
 
-# Sleep for 60 seconds, just in case for the k8 resources to be up & running:
+# Sleep for 60 seconds, just in case for the k8 resources to be up & running stable:
 sleep 60
 
 # Port-forwarding Cluster-ip service to localhost:8080 as a background process
