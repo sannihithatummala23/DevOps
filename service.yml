@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: romannumeralconverter-svc
 spec:
-  type: NodePort
+#  type: NodePort
   ports:
   - port: 8080
     targetPort: 8080
-    nodePort: 30001
+#    nodePort: 30001  <Can also expose the service on nodePort to access service directly on the Node w/o port-forwarding Cluster-IP>
   selector:
     app: RomanNumeral
