@@ -9,8 +9,7 @@ echo " "
 # Cloning DevOps Repository that has required K8 and Prometheus files:
 git clone https://github.com/sannihithatummala23/DevOps.git
 
-#As we have already created a Docker image and uploaded it to Docker hub,
-# next step, which is k8 deployment will retrive the image from there.
+#As we have already created a Docker image by building the Spring-boot project and uploaded it to Docker hub, Next step is to deploy k8 resources by retrieving the image from docker hub.
 
 #Sleep 5 Seconds, just in case for the Repository to download:
 sleep 5
