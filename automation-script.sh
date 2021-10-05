@@ -26,7 +26,7 @@ kubectl create -f service.yml -n monitoring
 sleep 30
 
 # Port-forwarding Cluster-ip service to localhost:8080 as a background process
-kubectl port-forward service/romannumeralconverter-svc 8080:8080 &
+kubectl port-forward service/romannumeralconverter-svc -n monitoring 8080:8080 &
 
 #Pull prometheus by executing the docker command:
 docker pull prom/prometheus
