@@ -42,6 +42,13 @@ sleep 60
 echo " "
 echo "***Port-forwarding Cluster-ip service to localhost:8080 as a background process***"
 kubectl port-forward service/romannumeralconverter-svc -n monitoring 8080:8080 &
+echo "Access RomanNumeralConverter Applicaion: http://localhost:8080/romannumeral?query=1"
+
+echo " "
+echo "***Pulling & deploying Grafana docker image***"
+docker run -d --name grafana -p 3000:3000 grafana/grafana
+echo " "
+echo "***Access Grafana: http://localhost:3000/ using credentials: admin/admin. You will be prompeted to update password after logging in!***"
 
 echo " "
 echo "***Downloading Prometheus docker image***"
@@ -50,15 +57,14 @@ docker pull prom/prometheus
 
 echo " "
 
-echo "#################"
-echo "***Update the <path/to/file>/project/DevOps/prometheus.yml > 'spring-actuator' targets:[xx:xx:xx:xx:8080] IP address configuration with the below k8 Service 'romannumeralconverter-svc' created Cluster-IP address***"
+echo "################# MANUAL STEP #################"
+echo "***Update the <path/to/file>/project/DevOps/prometheus.yml > 'spring-actuator' targets:[xx:xx:xx:xx:8080] IP address configuration with the k8 Service 'romannumeralconverter-svc' Cluster-IP address created below***"
 kubectl describe svc romannumeralconverter-svc -n monitoring | grep IPs | cut -d ":" -f2
+
+echo " "
+
+echo "***Once the prometheus.yml file is updated with the IP address, deploy prometheus by executing the below docker command***"
+echo " "
+echo "docker run -d --name prometheus -p 9090:9090 -v <path/to/file>/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus"
+echo "Access Prometheus: http://localhost:9090/ ***"
 echo "##################"
-
-#Deploy prometheus by executing the docker command:
-#docker run -d --name prometheus -p 9090:9090 -v <path/to/file>/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
-
-echo " "
-echo "***Pulling & deploying Grafana docker image***"
-docker run -d --name grafana -p 3000:3000 grafana/grafana
-echo " "
