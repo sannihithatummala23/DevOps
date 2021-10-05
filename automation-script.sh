@@ -52,7 +52,6 @@ echo " "
 
 echo "#################"
 echo "***Update the <path/to/file>/project/DevOps/prometheus.yml > 'spring-actuator' targets:[xx:xx:xx:xx:8080] IP address configuration with the below k8 Service 'romannumeralconverter-svc' created Cluster-IP address***"
-echo " "
 kubectl describe svc romannumeralconverter-svc -n monitoring | grep IPs | cut -d ":" -f2
 echo "##################"
 
