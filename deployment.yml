@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: romannumeral-converter
-          image: sannihithatummala/a-project:1.0
+          image: sannihithatummala/a-project:latest
           ports:
             - containerPort: 8080
               hostPort: 8080
